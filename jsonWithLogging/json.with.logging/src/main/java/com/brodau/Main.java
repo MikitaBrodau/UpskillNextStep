@@ -20,6 +20,7 @@ public class Main {
             }
             else logger.fatal("Fail to rename");
 
+            logger.trace("Shutdown program");
         } catch (IOException e) {
             logger.fatal("error", e);
         }
