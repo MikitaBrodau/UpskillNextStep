@@ -1,4 +1,4 @@
-package com.Brodau;
+package com.brodau;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertTrue;
@@ -20,9 +20,9 @@ public class QuadraticEquationTest
         assertArrayEquals(new double[]{0}, QuadraticEquation.quadraticEquation(1,0,0), 0);
 
     }
-    @Test (expected = ArithmeticException.class)
+    @Test
     public void NoSolutionQuadraticEquation() {
-        assertArrayEquals(new double[]{}, QuadraticEquation.quadraticEquation(0,1,1), 0);
+        assertArrayEquals(new double[]{0,0}, QuadraticEquation.quadraticEquation(0,1,1), 0);
     }
 }
 

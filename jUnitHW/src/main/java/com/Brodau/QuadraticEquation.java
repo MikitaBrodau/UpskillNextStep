@@ -1,9 +1,9 @@
-package com.Brodau;
+package com.brodau;
 
 public class QuadraticEquation {
     public static double[] quadraticEquation(double a, double b, double c) {
         if (a == 0) {
-            throw new ArithmeticException("value a, can't be equal to zero");
+            return new double[]{0,0};
         }
 
         double discriminant = Math.pow(b, 2) - (4 * a * c);
@@ -17,6 +17,6 @@ public class QuadraticEquation {
             double oneRoot = -b / 2 ;
             return new double[]{oneRoot};
         }
-        else return new double[0];
+        throw new RuntimeException();
     }
 }
