@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    <Properties>
+        <Property
+                name="simpleOutput">
+            C:\Users\Mikita_Brodau\upSkillLabNext\jsonWithLogging\json.with.logging\log\simple.log
+        </Property>
+        <Property
+                name="jsonOutput">C:\Users\Mikita_Brodau\upSkillLabNext\jsonWithLogging\json.with.logging\log\json.log
+        </Property>
+    </Properties>
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </Console>
+
+
+        <RollingFile name="RollingFileAppender" fileName="${simpleOutput}"
+                     filePattern="logs/$${date:yyyy-MM}/app-%d{MM-dd-yyyy}-%i.log.gz">
+            <PatternLayout>
+                <Pattern>%d [%t] %p %c - %m%n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <OnStartupTriggeringPolicy/>
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="50 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="20"/>
+        </RollingFile>
+
+
+        <File name="FileJSONAppender" fileName="${jsonOutput}">
+        <JSONLayout compact="false" eventEol="true"/>
+    </File>
+    </Appenders>
+    <Loggers>
+        <Root level="TRACE">
+            <AppenderRef ref="RollingFileAppender"/>
+            <AppenderRef ref="FileJSONAppender"/>
+            <AppenderRef ref="Console"/>
+        </Root>
+    </Loggers>
+
+</Configuration>

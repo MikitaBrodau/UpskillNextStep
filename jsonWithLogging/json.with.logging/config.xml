@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configEntries>
+
+    <configEntry>
+        <suffix>XML</suffix>
+        <files>C:\Users\Mikita_Brodau\junk\trash1.txt</files>
+        <files>C:\Users\Mikita_Brodau\junk\trash2.txt</files>
+        <files>C:\Users\Mikita_Brodau\junk\trash3.txt</files>
+    </configEntry>
+
+    <configEntry>
+        <suffix>Jez</suffix>
+        <files>C:\Users\Mikita_Brodau\junk\anotherTrash.txt</files>
+    </configEntry>
+
+</configEntries>
