@@ -58,16 +58,17 @@ public class EditFilesFromConfigEntry {
         return true;
     }
 
-    public String renamedFilesInfo(){
-        StringBuilder sb = new StringBuilder("Renamed files:\n");
+    public List<ConfigEntry> renamedFilesInfo(){
         for (ConfigEntry cfgEntry : configEntries) {
-            for (String path: cfgEntry.getFiles()) {
-                File file = new File(path);
-                sb.append(file.getName()).append("\t->\t").append(cfgEntry.getSuffix())
-                        .append("_").append(file.getName()).append("\n");
+            String[] paths = cfgEntry.getFiles();
+            for (int i = 0; i < paths.length; i++) {
+                File file = new File(paths[i]);
+                paths[i] = paths[i] + "\t" + ":" + "\t" +
+                        (file.getParent() + "\\" + cfgEntry.getSuffix() + "_" + file.getName());
             }
+            cfgEntry.setFiles(paths);
         }
-        return sb.toString();
+        return configEntries;
     }
 
     public static boolean ifFilesExistRename(EditFilesFromConfigEntry cfgReader) throws IOException {

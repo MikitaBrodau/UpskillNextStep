@@ -5,9 +5,11 @@ import org.apache.logging.log4j.Logger;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import java.io.File;
 import java.io.IOException;
+import java.io.StringWriter;
 import java.util.List;
 
 public class XMLMain {
@@ -22,12 +24,14 @@ public class XMLMain {
             EditFilesFromConfigEntry editFilesFromConfigEntry = new EditFilesFromConfigEntry(configEntryList);
             if (EditFilesFromConfigEntry.ifFilesExistRename(editFilesFromConfigEntry)) {
                 logger.info("Success");
-                System.out.println(editFilesFromConfigEntry.renamedFilesInfo());
-            }
-            else logger.fatal("Files not exist or can't be renamed");
+                getXMLDocWithRenamedFiles(
+                        "C:\\Users\\Mikita_Brodau\\upSkillLabNext\\jsonWithLogging\\json.with.logging\\target\\doc.xml",
+                        editFilesFromConfigEntry.renamedFilesInfo()
+                );
+            } else logger.fatal("Files not exist or can't be renamed");
 
             logger.trace("End of program");
-        } catch (JAXBException|IOException  e) {
+        } catch (JAXBException | IOException e) {
             logger.fatal("Error", e);
         }
 
@@ -40,5 +44,21 @@ public class XMLMain {
         ConfigEntries configEntries = (ConfigEntries) unmarshaller.unmarshal(config);
         logger.info("End reading config file");
         return configEntries.getConfigEntries();
+    }
+
+    private static void getXMLDocWithRenamedFiles(String outputPath, List<ConfigEntry> configEntryList) throws JAXBException {
+        ConfigEntries configEntries = new ConfigEntries();
+        configEntries.setConfigEntries(configEntryList);
+
+        JAXBContext jaxbContext = JAXBContext.newInstance(ConfigEntries.class);
+        Marshaller marshaller = jaxbContext.createMarshaller();
+        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+
+        StringWriter stringWriter = new StringWriter();
+        marshaller.marshal(configEntries, stringWriter);
+
+        File file = new File(outputPath);
+        marshaller.marshal(configEntries, file);
+        logger.trace("Created xml output document: " + outputPath);
     }
 }

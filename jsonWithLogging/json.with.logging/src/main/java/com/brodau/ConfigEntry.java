@@ -31,12 +31,4 @@ public class ConfigEntry {
     public String[] getFiles() {
         return files;
     }
-
-    @Override
-    public String toString() {
-        return "ConfigEntry{" +
-                "suffix='" + suffix + '\'' +
-                ", files=" + Arrays.toString(files) +
-                '}';
-    }
 }
