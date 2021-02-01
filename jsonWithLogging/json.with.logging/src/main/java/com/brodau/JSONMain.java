@@ -24,7 +24,6 @@ public class JSONMain {
             List<ConfigEntry> cfgEntries = jsonConfigEntryType(readConfig(config));
             EditFilesFromConfigEntry configEntry = new EditFilesFromConfigEntry(cfgEntries);
             if (EditFilesFromConfigEntry.ifFilesExistRename(configEntry)) {
-
                 logger.info("Success");
             }
             else logger.fatal("Files not exist or can't be renamed");
